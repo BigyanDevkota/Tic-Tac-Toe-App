@@ -27,11 +27,7 @@ class _GameScreenState extends State<GameScreen> {
   bool winnerFound = false;
 
   TextStyle upperTextStyle() {
-    return GoogleFonts.coiny(
-      color: MainColor.secondary,
-      fontSize: 40,
-      // fontWeight: FontWeight.bold
-    );
+    return GoogleFonts.coiny(color: MainColor.secondary, fontSize: 40);
   }
 
   void updateScore(String winner) {
@@ -52,6 +48,7 @@ class _GameScreenState extends State<GameScreen> {
       result = '';
     });
     filled = 0;
+    matchIndices = [];
   }
 
   Timer? timer;
@@ -168,10 +165,7 @@ class _GameScreenState extends State<GameScreen> {
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
-                        border: Border.all(
-                          color: MainColor.primary,
-                          width: 5,
-                        ),
+                        border: Border.all(color: MainColor.primary, width: 5),
                         color:
                             matchIndices.contains(index)
                                 ? MainColor.secondary
@@ -327,6 +321,7 @@ class _GameScreenState extends State<GameScreen> {
     if (!winnerFound && filled == 9) {
       setState(() {
         result = 'Nobody Wins !';
+        // stopTimer();
       });
     }
   }
