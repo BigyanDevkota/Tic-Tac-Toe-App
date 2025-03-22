@@ -318,10 +318,10 @@ class _GameScreenState extends State<GameScreen> {
         updateScore(displayXO[2]);
       });
     }
-    if (!winnerFound && filled == 9) {
+    if (filled == 9) {
       setState(() {
         result = 'Nobody Wins !';
-        // stopTimer();
+        stopTimer();
       });
     }
   }
