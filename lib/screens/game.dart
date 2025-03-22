@@ -214,6 +214,10 @@ class _GameScreenState extends State<GameScreen> {
         } else if (!oTurn && displayXO[index] == '') {
           displayXO[index] = 'X';
           filled++;
+        } else if (oTurn && displayXO[index] != '') {
+          _tapped(index);
+        } else if (!oTurn && displayXO[index] != '') {
+          _tapped(index);
         }
 
         oTurn = !oTurn;
