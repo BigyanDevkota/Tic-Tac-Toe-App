@@ -206,25 +206,40 @@ class _GameScreenState extends State<GameScreen> {
 
   void _tapped(int index) {
     final bool isRunning = timer == null ? false : timer!.isActive;
-    if (isRunning) {
+
+    // Optimized Snippet -- Recursion is removed
+    // Works only when container is empty
+    if (isRunning && displayXO[index] == '') {
       setState(() {
-        if (oTurn && displayXO[index] == '') {
-          displayXO[index] = '0';
-          filled++;
-        } else if (!oTurn && displayXO[index] == '') {
-          displayXO[index] = 'X';
-          filled++;
-        } else if (oTurn && displayXO[index] != '') {
-          _tapped(index);
-        } else if (!oTurn && displayXO[index] != '') {
-          _tapped(index);
-        }
-
+        displayXO[index] = oTurn ? '0' : 'X';
+        filled++;
         oTurn = !oTurn;
-
         _checkWinner();
       });
     }
+
+    // Unoptimized Snippet -- It contains Recursion
+
+    // if (isRunning) {
+    //   setState(() {
+    //     if (oTurn && displayXO[index] == '') {
+    //       displayXO[index] = '0';
+    //       filled++;
+    //     } else if (!oTurn && displayXO[index] == '') {
+    //       displayXO[index] = 'X';
+    //       filled++;
+    //     } else if (oTurn && displayXO[index] != '') {
+    //       _tapped(index);
+    //     } else if (!oTurn && displayXO[index] != '') {
+    //       _tapped(index);
+    //     }
+
+    //     oTurn = !oTurn;
+
+    //     _checkWinner();
+
+    //  });
+    // }
   }
 
   void _checkWinner() {
