@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/constant/colors.dart';
 
+import 'package:google_fonts/google_fonts.dart';
+
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
 
@@ -23,6 +25,14 @@ class _GameScreenState extends State<GameScreen> {
   int filled = 0;
 
   bool winnerFound = false;
+
+  TextStyle upperTextStyle() {
+    return GoogleFonts.coiny(
+      color: MainColor.secondary,
+      fontSize: 40,
+      // fontWeight: FontWeight.bold
+    );
+  }
 
   void updateScore(String winner) {
     if (winner == '0') {
@@ -78,17 +88,17 @@ class _GameScreenState extends State<GameScreen> {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              CircularProgressIndicator.adaptive(
+              CircularProgressIndicator(
                 value: 1 - seconds / maxSeconds,
-                valueColor: AlwaysStoppedAnimation(Colors.white),
+                valueColor: AlwaysStoppedAnimation(MainColor.primary),
                 strokeWidth: 8,
-                backgroundColor: MainColor.accent,
+                backgroundColor: MainColor.secondary,
               ),
               Center(
                 child: Text(
                   '$seconds',
                   style: TextStyle(
-                    color: Colors.white,
+                    color: MainColor.accent,
                     fontSize: 50,
                     fontWeight: FontWeight.bold,
                   ),
@@ -106,7 +116,7 @@ class _GameScreenState extends State<GameScreen> {
           },
           child: Text(
             attemps == 0 ? 'Start' : 'Play Again !',
-            style: TextStyle(color: Colors.black, fontSize: 18),
+            style: TextStyle(color: MainColor.accent, fontSize: 22),
           ),
         );
   }
@@ -118,29 +128,28 @@ class _GameScreenState extends State<GameScreen> {
         backgroundColor: MainColor.primary,
         body: Column(
           children: [
+            SizedBox(height: 10),
             Expanded(
               flex: 1,
-              child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Player 0', style: TextStyle(fontSize: 36)),
-                        Text(oScore.toString(), style: TextStyle(fontSize: 36)),
-                      ],
-                    ),
-                    SizedBox(width: 25),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Player X', style: TextStyle(fontSize: 36)),
-                        Text(xScore.toString(), style: TextStyle(fontSize: 36)),
-                      ],
-                    ),
-                  ],
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Player 0', style: upperTextStyle()),
+                      Text(oScore.toString(), style: upperTextStyle()),
+                    ],
+                  ),
+                  SizedBox(width: 25),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Player X', style: upperTextStyle()),
+                      Text(xScore.toString(), style: upperTextStyle()),
+                    ],
+                  ),
+                ],
               ),
             ),
             Expanded(
@@ -158,10 +167,9 @@ class _GameScreenState extends State<GameScreen> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(15),
                         border: Border.all(
                           color: MainColor.primary,
-                          // color: Colors.black,
                           width: 5,
                         ),
                         color:
@@ -169,14 +177,12 @@ class _GameScreenState extends State<GameScreen> {
                                 ? MainColor.secondary
                                 : MainColor.accent,
                       ),
-                      child: Center(
+                      child: Align(
+                        alignment: Alignment.topCenter,
                         child: Text(
                           displayXO[index],
-                          style: TextStyle(
-                            fontSize: 50,
-                            fontWeight: FontWeight.bold,
-                            // color: MainColor.primary,
-                          ),
+                          style: GoogleFonts.coiny(fontSize: 70),
+                          // style: TextStyle(fontSize: 46)
                         ),
                       ),
                     ),
@@ -191,7 +197,7 @@ class _GameScreenState extends State<GameScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(result, style: TextStyle(fontSize: 36)),
+                    Text(result, style: upperTextStyle()),
                     SizedBox(height: 10),
                     _buildTimer(),
                   ],
